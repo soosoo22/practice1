@@ -1,0 +1,18 @@
+/*버스 노선 콤보상자*/
+select {
+    position: absolute; 
+
+    width: 300px;
+    padding: .8em .5em; /*여백으로 높이 설정*/
+    font-family: 'Source Sans Pro', sans-serif;
+    background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+    background-color: white;
+    border: 3px solid #000a12;
+    border-radius: 0px;
+    -webkit-appearacne: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+select::-ms-expand{
+    display: none;
+}

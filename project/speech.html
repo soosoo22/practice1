@@ -1,0 +1,163 @@
+<!--speech api 승하차 예약-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.google.com/noto/specimen/Noto+Serif+KR?subset=korean" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="폰트어썸 본인 CDN" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style3.css">
+  <link rel="stylesheet" href="select_style.css">
+
+
+  <script src="main.js" defer></script>
+  <link rel="shortcut icon" type="image⁄x-icon" href="C:\Users\SAMSUNG\Desktop\버스.png">
+  <title>Bus Information System</title>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  <!--파이썬 css 연동-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style3.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/select_style.css') }}">
+
+
+</head>
+
+
+<body>
+  <div style="text-align:center">
+  <h1 class="fa fa-microphone" style="font-size:100px; "></h1>
+    <span style="font-size: 50px">SpeechRecognition</span>
+
+</div>
+
+<!--div align="center">
+  <button type="submit" id="m_btn" class="fa fa-envelope" style="background-color:black; position:absolute; z-index:-1; height:50px; font-size:30px; margin-top:400px" ></button>
+</div-->
+
+  <div class="words" contenteditable style="float:left; margin-right:100px; width:500px"> <!--text box!-->
+  </div>
+  <div class="words2" contenteditable style="float:left; width:500px"> <!--text box!-->
+  </div>
+
+
+<script>
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  let recognition = new SpeechRecognition();
+  recognition.interimResults = true;
+  recognition.lang = 'ko-KR';
+
+  let makeNewTextContent = function() {
+    p = document.createElement('p');
+    document.querySelector('.words').appendChild(p);
+
+  };
+
+  let p = null;
+
+  recognition.start();  //음성 인식 시작
+  recognition.onstart = function() {
+    makeNewTextContent(); // 음성 인식 시작시마다 새로운 문단을 추가한다.
+  };
+  recognition.onend = function() {
+    console.log("음성 인식 완료");
+    recognition.start();
+  };
+
+  recognition.onresult = function(e) {
+    let texts = Array.from(e.results)
+            .map(results => results[0].transcript).join("");
+
+    console.log(texts);
+    p.textContent = texts;
+  };
+</script>
+
+
+  <style>
+    html {
+      font-size: 10px;
+    }
+
+    body {
+      background: white;
+      font-family: 'helvetica neue';
+      font-weight: 200;
+      font-size: 20px;
+    }
+
+    .words {
+      max-width: 500px;
+      margin: 150px auto;
+      margin-left: 120px;
+      background: #000a12;
+      border-radius: 5px;
+      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+      padding: 1rem 2rem 1rem 5rem;
+      /*background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;*/
+      background-size: 100% 3rem;
+      position: relative;
+      line-height: 3rem;
+      color : white;
+      font-family: "Noto Serif Korean", sans-serif;
+      font-size:20px;
+    }
+    .words2 {
+      max-width: 500px;
+      margin: 150px auto;
+      margin-left: 100px;
+      background: #000a12;
+      border-radius: 5px;
+      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+      padding: 1rem 2rem 1rem 5rem;
+      /*background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;*/
+      background-size: 100% 3rem;
+      position: relative;
+      line-height: 3rem;
+      color : #ff9900;
+      font-family: "Noto Serif Korean", sans-serif;
+      font-size:20px;
+
+    }
+
+    p {
+      margin: 0 0 3rem;
+    }
+
+    .words:before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      top: 0;
+      left: 30px;
+      bottom: 0;
+      border: 1px solid;
+      border-color: transparent #efe4e4;
+    }
+    .words2:before { /*작대기바*/
+      content: '';
+      position: absolute;
+      width: 4px;
+      top: 0;
+      left: 30px;
+      bottom: 0;
+      border: 1px solid;
+      border-color: transparent #efe4e4;
+    }
+
+  </style>
+
+
+</body>
+</html>
+
+
+
+
+

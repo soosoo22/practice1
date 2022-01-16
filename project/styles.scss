@@ -1,0 +1,48 @@
+/*body{
+    width: 100vw;
+    height: 100vh;
+    //vw, vh : 뷰포트 너비, 길이, 사용하는 디스플레이 크기를 알고 전체화면을 맞춘다.
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    //정가운데 위치할 수 있게 해준다.
+    flex-direction: column;
+    background: #f3f0f1;
+
+}
+.button{
+    width: 200px;
+    height: 100px;
+    background: #f3f0f1;
+    position: relative;
+    margin-bottom:25px;
+    text-align: center;
+    border-radius: 50px;
+    transition: all 0.1s ease-in-out;
+    font-size:32px;
+    box-shadow: -6px -6px 5px rgba(228,226,226,0.8), 6px 6px 10px rgba(0,0,0,0.2);
+    color: #34d2c7;
+    line-height: 100px;
+
+}*/
+.active{
+    box-shadow: inset -5px -5px 5px rgba(225,225,225,0.5),
+    inset 8px 0px 16px rgba(0,0,0,0.1);
+    color: #ffffff;
+    background-color: #34d2c7;
+}
+
+.container{
+    background-color: #e7e9ed;
+    padding:10px;
+    border-radius: 50px;
+    box-shadow: -6px -6px 5px rgba(228,226,226,0.8), 6px 6px 10px rgba(0,0,0,0.2);
+
+}
+
+
+
+
+
+
+

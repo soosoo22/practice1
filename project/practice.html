@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style2.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="폰트어썸 본인 CDN" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style3.css">
+        <link rel="stylesheet" href="select_style.css">
+
+
+        <script src="main.js" defer></script>
+        <link rel="shortcut icon" type="image⁄x-icon" href="C:\Users\SAMSUNG\Desktop\버스.png">
+        <title>Bus Information System</title>
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+        <!--파이썬 css 연동-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style3.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/select_style.css') }}">
+
+
+
+
+</head>
+<body style="background-color: #d7e1ec;">
+        <nav class="navbar">
+                <div class="navbar__logo">
+                        <!--i class="fab fa-amazon"></i-->
+                        <i class="fa fa-bus"></i>
+                        <a href="#">BIS</a>
+                </div>
+                <ul class="navbar__menu" >
+                        <li><a href="#">버스노선</a></li>
+                        <li><a href="#">정류소명</a></li>
+                        <li><a href="#">승하차예약</a></li>
+                        <li><a href="#">출도착안내</a></li>
+                        <li><a href="#">이용안내</a></li>
+                </ul>
+                <!--ul class="navbar__sns">
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                </ul-->
+                <div class="menu">
+                    <input type="text" placeholder="Search..." class="input_text">
+                    <button class="fa fa-search" ></button>
+                </div>
+                <a href="#" class="navbar__toggleBtn"> <i class="fas fa-bars"></i> </a>
+        </nav>
+
+
+        
+        <!--bus icon-->
+        <div class="wrapper">
+            <div class="icon facebook" onClick="location.href='busstop_r.html'">
+              <div class="tooltip">Route</div>
+              <span><i class="fa fa-database"></i></span>
+            </div>
+          
+            <div class="icon twitter" onClick="location.href='busstop_p.html'">
+              <div class="tooltip">Busstop</div>
+              <span><i class="fa fa-bus"></i></span>
+            </div>
+
+            <div class="icon star" onClick="location.href='speech.html'">
+                <div class="tooltip">GetOnOff</div>
+                <span><i class="fa fa-envelope"></i></span>
+              </div>
+  
+        <div class="icon github">
+              <div class="tooltip">Time</div>
+              <span><i class="fa fa-file"></i></span>
+            </div>
+        <div class="icon youtube">
+              <div class="tooltip">Information</div>
+              <span><i class="fa fa-info"></i></span>
+            </div>
+        </div>
+        
+
+        <!--bus icon-->
+        <style>
+                .wrapper{
+                    height:600px;
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    
+                }
+                .wrapper .icon{
+                    margin: 0 20px;
+                    cursor:pointer;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    flex-direction:column;
+                    position: relative;
+                    z-index:2;
+                    
+                }
+                .wrapper .icon span{
+                    position:relative;
+                    z-index:2;
+                    height: 60px;
+                    width: 60px;
+                    display:block;
+                    background: #fff;
+                    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                    border-radius:50%;
+                    text-align:center;
+                    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                }
+                .wrapper .icon span i{
+                    font-size:25px;
+                    line-height:60px;
+                }
+                .wrapper .icon .tooltip{
+                    position:absolute;
+                    top:0px;
+                    background: #fff;
+                    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                    font-size: 20px;
+                    padding: 10px 18px;
+                    border-radius: 25px;
+                    color:white;
+                    opacity:0;
+                    pointer-events: none;
+                    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                }
+                .wrapper .icon:hover .tooltip{
+                    opacity:1;
+                    pointer-events: auto;
+                    top:-70px;
+                }
+                .wrapper .icon .tooltip:before{
+                    position:absolute;
+                    content:"";
+                    height:15px;
+                    width:15px;
+                    bottom:-8px;
+                    left:50%;
+                    transform: translateX(-50%) rotate(45deg);
+                }
+                .wrapper .icon:hover span,
+                .wrapp .icon:hover .tooltip{
+                    text-shadow: 0px -1px 0px rgba(0,0,0,0.4);
+                }
+                .wrapper .icon:hover span{
+                    color: #fff;
+                }
+                .wrapper .facebook:hover span,
+                .wrapper .facebook:hover .tooltip,
+                .wrapper .facebook:hover .tooltip:before{
+                    background:#008000;
+                }
+                .wrapper .star:hover span,
+                .wrapper .star:hover .tooltip,
+                .wrapper .star:hover .tooltip:before{
+                    background:#5808b4;
+                }
+                .wrapper .twitter:hover span,
+                .wrapper .twitter:hover .tooltip,
+                .wrapper .twitter:hover .tooltip:before{
+                    background:#ff9900;
+                }
+                .wrapper .github:hover span,
+                .wrapper .github:hover .tooltip,
+                .wrapper .github:hover .tooltip:before{
+                    background:#333;
+                }
+                .wrapper .youtube:hover span,
+                .wrapper .youtube:hover .tooltip,
+                .wrapper .youtube:hover .tooltip:before{
+                    background:#3B5999;
+                }
+
+
+        </style>
+
+        
+
+</body>
+</html>

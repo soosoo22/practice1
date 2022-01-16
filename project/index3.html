@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <!-- Webpage Title -->
+        <link rel="shortcut icon" type="image⁄x-icon" href="C:\Users\SAMSUNG\Desktop\버스.png">
+        <title >Bus Information System</title>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <!--meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"-->
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+
+        <!-- 구글폰트 -->
+        <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+
+        <style type="text/css">
+            * {
+                font-family: "맑은 고딕", sans-serif;
+            }
+
+            h1,
+            h5 {
+                display: inline;
+            }
+
+            .info {
+                margin-top: 30px;
+                margin-bottom: 20px;
+            }
+
+            .review {
+                text-align: center;
+            }
+
+            .reviews {
+                margin-top: 1px;
+            }
+        </style>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/new.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #test_color{
+                border: 1px #00FF00;
+                background-color: white;
+            }
+        </style>
+        
+
+        <!--Speech Api-->
+        <link href="https://fonts.google.com/noto/specimen/Noto+Serif+KR?subset=korean" rel="stylesheet">
+      
+        <link rel="stylesheet" href="style2.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="폰트어썸 본인 CDN" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style3.css">
+        <link rel="stylesheet" href="select_style.css">
+      
+      
+        <script src="main.js" defer></script>
+        <link rel="shortcut icon" type="image⁄x-icon" href="C:\Users\SAMSUNG\Desktop\버스.png">
+        <title>Bus Information System</title>
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+      
+        <!--파이썬 css 연동-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style3.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/select_style.css') }}">
+        <!--Speech Api 여기까지-->
+      
+      
+
+
+    </head>
+
+
+
+    <body style="background-color:#000a12">
+
+        
+        <!--Speech Api-->
+        <div class="words" contenteditable> <!--text box!-->
+        </div>
+      
+      <script>
+        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      
+        let recognition = new SpeechRecognition();
+        recognition.interimResults = true;
+        recognition.lang = 'ko-KR';
+      
+        let makeNewTextContent = function() {
+          p = document.createElement('p');
+          document.querySelector('.words').appendChild(p);
+        };
+      
+        let p = null;
+      
+        recognition.start();  //음성 인식 시작
+        recognition.onstart = function() {
+          makeNewTextContent(); // 음성 인식 시작시마다 새로운 문단을 추가한다.
+        };
+        recognition.onend = function() {
+          console.log("음성 인식 완료");
+          recognition.start();
+        };
+      
+        recognition.onresult = function(e) {
+          let texts = Array.from(e.results)
+                  .map(results => results[0].transcript).join("");
+      
+          console.log(texts);
+          p.textContent = texts;
+        };
+      </script>
+      
+      
+        <style>
+          /*html {
+            font-size: 10px;
+            
+          }
+      
+          body {
+            background: #000a12;
+            font-family: 'helvetica neue';
+            font-weight: 200;
+            font-size: 20px;
+          }*/
+      
+          .words {
+            max-width: 500px;
+            margin: 150px auto;
+            margin-left: 100px;
+            background: #000a12;
+            border-radius: 5px;
+            box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+            padding: 1rem 2rem 1rem 5rem;
+            /*background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;*/
+            background-size: 100% 3rem;
+            position: relative;
+            line-height: 3rem;
+            color : white;
+            font-family: "Noto Serif Korean", sans-serif;
+            font-size:20px;
+            position: absolute; 
+            z-index:-1;
+
+          }
+      
+          p {
+            margin: 0 0 3rem;
+          }
+      
+          .words:before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            top: 0;
+            left: 30px;
+            bottom: 0;
+            border: 1px solid;
+            border-color: transparent #efe4e4;
+          }
+        </style>
+        <!--Speech Api 여기까지-->      
+
+
+        <table>
+            
+                <td><div class="container">
+                    <button style="visibility:hidden;">d</button></td>
+
+
+
+
+                   <td><div class="info">
+                    <form action = "http://172.30.1.32:8080/result" method = "POST" style="margin-left: 1000px;">
+                        <div class="input-group mb-3" id= "test_color">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="color:white; background-color:#000a12; border:2px solid white;" >버스 번호</span>
+                            </div>
+                            
+                                <input type="text" class="form-control" id="bus"   name = "예약 : " style="color:#ff9900; background-color:#000a12; border:2px solid white;">
+                                
+                            
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="color:white; background-color:#000a12; border:2px solid white;">승차정류장</span>
+                            </div>
+                            <input type="text" class="form-control" id="get_busstop" style="color:#ff9900; background-color:#000a12; border:2px solid white;">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="color:white; background-color:#000a12; border:2px solid white;">하차정류장</span>
+                            </div>
+                            <input type="text" class="form-control" id="getoff_busstop" style="color:#ff9900; background-color:#000a12; border:2px solid white;">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="color:white; background-color:#000a12; border:2px solid white;">요청사항</span>
+                            </div>
+                            <textarea class="form-control" id="request" style="color:#ff9900; background-color:#000a12; border:2px solid white;"
+                                    cols="30"
+                                    rows="5" ></textarea>
+                        </div>
+                        <div class="review">
+                        <div align="right">
+                            <button onclick="search();" type="button" class="btn vtn-warning" style="color:white; background-color:#ff9900">입력</button>
+                        </div>
+                        <br>
+                        <br>
+                            
+                        
+                        </div>
+                    </div>
+                    <div class="reviews">
+                        <table class="table" style = "color:white">
+                            <thead>
+                            <tr>
+                                <th scope="col" >버스번호</th>
+                                <th scope="col">승차 정류장</th>
+                                <th scope="col">하차 정류장</th>
+                                <th scope="col">요청사항</th>
+                                
+                            </tr>
+                            <tr>
+                                <th scope="col" id="result"></th>
+                                <th scope="col" id="result2"></th>
+                                <th scope="col" id="result3"></th>
+                                <th scope="col" id="result4"></th>
+                            </tr>
+                            
+                            </thead>
+                            <tbody id="reviews-box">
+
+                            </tbody>
+                        </td>
+                        
+                        </table>
+                        
+                                <p id="res"></p>
+                                <script type="text/javascript">
+                                    function search(){
+                                        document.getElementById("result").innerHTML = $("#bus").val();;
+                                        document.getElementById("result2").innerHTML = $("#get_busstop").val();;
+                                        document.getElementById("result3").innerHTML = $("#getoff_busstop").val();;
+                                        document.getElementById("result4").innerHTML = $("#request").val();;
+
+                                        var text_data = $("#bus").val();
+                                        
+
+                                        
+                                       
+                                    }
+                                </script>
+                                <div align="right">
+                                    <input type = "submit" class="btn vtn-warning center" style="color:white; background-color:#ff9900; " value = "전송" />
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </tr>
+        </table>
+        
+
+
+
+
+    </body>
+
+</html>
+

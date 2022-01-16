@@ -1,0 +1,138 @@
+<!--버스 정류장-->
+<!DOCTYPE html> 
+<html> 
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style2.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="폰트어썸 본인 CDN" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style3.css">
+        <link rel="stylesheet" href="select_style.css">
+
+
+        <script src="main.js" defer></script>
+        <link rel="shortcut icon" type="image⁄x-icon" href="C:\Users\SAMSUNG\Desktop\버스.png">
+        <title>Bus Information System</title>
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+        <!--파이썬 css 연동-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style3.css') }}">
+
+
+
+        <title>Bus Information System</title> 
+
+        <style type="text/css"> 
+        #map { 
+            height: 500px; 
+            width: 900px; 
+            margin-top: 100px;
+            margin-left: 300px;
+        } 
+    </style> 
+    <script src="busstop.js"></script>
+    <script> 
+        function initMap() { 
+            const uluru = { lat: 35.14168993986486, lng: 126.93204655554388 }; 
+            const map = new google.maps.Map(document.getElementById("map"), { 
+                zoom: 15, center: uluru, });
+
+            var marker = new google.maps.Marker({ 
+                position: uluru, 
+                map: map, 
+            }); 
+
+
+            var markers = [];
+
+            var infowindow = new google.maps.InfoWindow();
+
+             //마커 생성
+             for (var i = 0; i < BUS_STOP.length; i++) {
+                var marker = new google.maps.Marker({
+                    //map: map,
+                    visible: true,
+                    position: new google.maps.LatLng(BUS_STOP[i][3], BUS_STOP[i][2]),
+                });
+
+                markers.push(marker);
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        //html로 표시될 인포 윈도우의 내용
+                        infowindow.setContent(BUS_STOP[i][1]);
+                        //인포윈도우가 표시될 위치
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+
+                if (marker) {
+                    marker.addListener('click', function () {
+                        //중심 위치를 클릭된 마커의 위치로 변경
+                        map.setCenter(this.getPosition());
+                        //마커 클릭 시의 줌 변화
+                        map.setZoom(17);
+                    });
+                }
+            }
+            google.maps.event.addListener(map, 'zoom_changed', function () {
+                var zoom = map.getZoom();
+                console.log("현재 zoom level : " + zoom)
+                
+                if (zoom >= 16) {
+                    for (var i = 0; i < markers.length; i++) {
+                        markers[i].setMap(map);
+                    }
+                }
+                else {
+                    for (var i = 0; i < markers.length; i++) {
+                        markers[i].setMap(null);
+                    }
+                }
+            });
+        }
+        
+    </script> 
+</head> 
+<body style="background-color: #d7e1ec;">
+    <nav class="navbar">
+        <div class="navbar__logo">
+                <!--i class="fab fa-amazon"></i-->
+                <i class="fa fa-bus"></i>
+                <a href="#" onClick="location.href='practice.html'" >BIS</a>
+        </div>
+        <ul class="navbar__menu" >
+                <li><a href="#">버스노선</a></li>
+                <li><a href="#">정류소명</a></li>
+                <li><a href="#">출도착안내</a></li>
+                <li><a href="#">이용안내</a></li>
+        </ul>
+        <!--ul class="navbar__sns">
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+        </ul-->
+        <div class="menu">
+            <input type="text" placeholder="Search..." class="input_text">
+            <button class="fa fa-search" ></button>
+        </div>
+        <a href="#" class="navbar__toggleBtn"> <i class="fas fa-bars"></i> </a>
+</nav>
+
+    
+
+    <!--h3>My Google Maps Demo</h3--> 
+
+    <div id="map" style="border:10px ridge #000a12;" ></div> 
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0SZqnzFTUJ0pDDItOSAXHs4ZgQC6M69I&callback=initMap"async ></script>
+
+    </body> 
+</html>
+
+
+
