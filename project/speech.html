@@ -1,4 +1,4 @@
-<!--speech api 승하차 예약-->
+<!--speech api 승하차 예약 SpeechSynthesis (Text-to-Speech)와 SpeechRecognition (음성 -> text )-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,18 +40,29 @@
   <button type="submit" id="m_btn" class="fa fa-envelope" style="background-color:black; position:absolute; z-index:-1; height:50px; font-size:30px; margin-top:400px" ></button>
 </div-->
 
-  <div class="words" contenteditable style="float:left; margin-right:100px; width:500px"> <!--text box!-->
+  <div class="words" id="txt" contenteditable style=" float:left; margin-right:100px; width:500px"> <!--왼쪽 text box!-->
   </div>
   <div class="words2" contenteditable style="float:left; width:500px"> <!--text box!-->
   </div>
 
 
+  <!--text to speech>
+  <select id="select-lang" style="display:none">
+    <option value="ko-KR" >한국어</option>
+  </select>
+  <form name="form1">
+  <textarea id="text" rows="5" cols="20" ></textarea>
+  <button id="btn-read" >읽기</button>
+  </form-->
+
 <script>
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;  //크롬
 
   let recognition = new SpeechRecognition();
   recognition.interimResults = true;
   recognition.lang = 'ko-KR';
+  recognition.continuous = true; //계속 실행
+  recognition.maxAlternatives = 10000;
 
   let makeNewTextContent = function() {
     p = document.createElement('p');
@@ -75,8 +86,61 @@
             .map(results => results[0].transcript).join("");
 
     console.log(texts);
+    /*let final = document.getElementById("text");  text=> textarea 값 삽입
+    final.value = texts;
+    if(final.value.match(/읽어/g)){
+      speak(final.value, {
+          rate: 1,
+          pitch: 1.2,
+          lang: selectLang.options[selectLang.selectedIndex].value
+      })
+
+    }*/
     p.textContent = texts;
   };
+
+
+  //recognition.addEventListener('end', recognition.start);
+
+
+  /*Text-To-Speech
+  function speak(text, opt_prop) {
+      if (typeof SpeechSynthesisUtterance === "undefined" || typeof window.speechSynthesis === "undefined") {
+          alert("이 브라우저는 음성 합성을 지원하지 않습니다.")
+          return
+      }
+      
+      window.speechSynthesis.cancel() // 현재 읽고있다면 초기화
+
+      const prop = opt_prop || {}
+
+      const speechMsg = new SpeechSynthesisUtterance()
+      speechMsg.rate = prop.rate || 2 // 속도: 0.1 ~ 10      
+      speechMsg.pitch = prop.pitch || 1 // 음높이: 0 ~ 2
+      speechMsg.lang = prop.lang || "ko-KR"
+      speechMsg.text = text
+      
+      // SpeechSynthesisUtterance에 저장된 내용을 바탕으로 음성합성 실행
+      window.speechSynthesis.speak(speechMsg)
+  }
+
+
+  // 이벤트 영역
+  const selectLang = document.getElementById("select-lang")
+  const text = document.getElementById("text")
+  const btnRead = document.getElementById("btn-read")
+
+  btnRead.addEventListener("click", e => {
+      speak(text.value, {
+          rate: 1,
+          pitch: 1.2,
+          lang: selectLang.options[selectLang.selectedIndex].value
+      })
+  })
+여기까지*/
+
+
+
 </script>
 
 
@@ -152,6 +216,8 @@
     }
 
   </style>
+
+
 
 
 </body>
